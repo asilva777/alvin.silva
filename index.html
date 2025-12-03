@@ -1,22 +1,763 @@
-    * Ensure the new features and content additions seamlessly integrate with the existing course design and user experience.
-    * Maintain the overall consistency and coherence of the course throughout the implementation.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alvin M. Silva, MDM - Development Management Professional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@600&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-Remember, the existing content that is not mentioned should remain unchanged.
+        :root {
+            --primary-blue: #0078ff;
+            --secondary-blue: #00c6ff;
+            --gold: #d4af37;
+            --dark: #1a1a1a;
+            --light: #f5f5f5;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --border: #e0e0e0;
+        }
 
+        body {
+            font-family: 'Roboto Condensed', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
 
-Implement a Freemium Payment Scheme:
-* Free Access to Course Content and Experience:
-    * Allow users to access the course content, learning materials, and experience the course for free.
-    * Users should be able to learn, explore, and evaluate the course without any payment.
-* Paid Certificate of Completion:
-    * Provide users the option to purchase a Certificate of Completion for the "Certification Course for Mental Health and Well-Being Paraprofessional".
-    * Set the price for the certificate at PHP 1,500.
-* Payment Integration:
-    * Integrate a secure payment gateway to allow users to purchase the Certificate of Completion.
-    * Ensure a smooth and user-friendly payment experience.
-* Certification Delivery:
-    * Upon successful payment, deliver the Certificate of Completion to the user.
-    * Provide the user with the option to download or print the certificate.
-* Verification and Validation:
-    * Implement a system to validate the authenticity of the issued certificates using the Verification Code.
-    * Allow users and third parties to verify the certificate details online.
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            margin-top: 80px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="30" r="1.5" fill="rgba(255,255,255,0.15)"/></svg>');
+            opacity: 0.4;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            border: 4px solid var(--gold);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: fadeInScale 1s ease;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero .subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease;
+            font-weight: 600;
+        }
+
+        .hero .mission {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1.5rem 2rem;
+            background: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            animation: fadeInUp 1.2s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--gold);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.6);
+            background: #f0c040;
+        }
+
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--gold), var(--secondary-blue));
+            border-radius: 2px;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--gray);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 30px rgba(0,120,255,0.1);
+            transition: all 0.4s;
+            border: 2px solid var(--border);
+            border-top: 5px solid var(--primary-blue);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,198,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0,120,255,0.2);
+            border-top-color: var(--gold);
+        }
+
+        .service-card h3 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        .service-card p strong {
+            color: var(--dark);
+            font-size: 1.05rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid var(--border);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .portfolio-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-blue), var(--secondary-blue));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .portfolio-item:hover {
+            background: white;
+            box-shadow: 0 10px 35px rgba(0,120,255,0.15);
+            border-color: var(--secondary-blue);
+        }
+
+        .portfolio-item:hover::before {
+            opacity: 1;
+        }
+
+        .portfolio-item h3 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary-blue);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            transition: all 0.4s;
+            border: 2px solid var(--border);
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0,120,255,0.25);
+            border-color: var(--gold);
+        }
+
+        .book-cover {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-cover::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212,175,55,0.3) 0%, transparent 70%);
+        }
+
+        .book-info {
+            padding: 2rem;
+        }
+
+        .book-info h3 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .book-type {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border-radius: 25px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .stock {
+            color: var(--gray);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,120,255,0.3);
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,120,255,0.4);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #2a2a2a 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 3px solid var(--gold);
+        }
+
+        .footer-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+        }
+
+        .footer h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .services-grid, .portfolio-grid, .books-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-logo {
+                width: 90px;
+                height: 90px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo-container">
+                <img src="https://i.imgur.com/EebYhGX.png" alt="Alvin Silva Logo" class="logo-img">
+                <div class="logo-text">ALVIN M. SILVA, MDM</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#books">Books</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <img src="https://i.imgur.com/EebYhGX.png" alt="Alvin Silva Logo" class="hero-logo">
+            <h1>ALVIN M. SILVA, MDM</h1>
+            <p class="subtitle">Development Management Professional | DRR & CCA Consultant | Systems Innovation Practitioner</p>
+            <div class="mission">
+                <strong>Mission:</strong> Driving impactful solutions and fostering co-creation for a more sustainable and resilient future through strategic innovation and resilience-building.
+            </div>
+            <a href="#services" class="btn">Explore Services</a>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2 class="section-title">About</h2>
+        <div class="about-content">
+            <p>Seasoned sustainability and development management professional with almost 2 decades of experience in program design, donor-funded project management, start-up acceleration, and multi-stakeholder engagement across the Philippines and Asia. Expertise in sustainability reporting, climate resilience, circular economy, and inclusive governance.</p>
+            <br>
+            <p>Track record of collaborating with multilateral organizations (USAID, GIZ, WHO, German Red Cross, The Asia Foundation), designing capacity-building programs for SMEs, LGUs, and national agencies, and aligning local initiatives with international sustainability frameworks. Adept at leading cross-sector partnerships, policy advocacy, and capacity development to advance equitable and sustainable development.</p>
+        </div>
+    </section>
+
+    <section id="services" class="section" style="background: var(--light);">
+        <h2 class="section-title">Services Offered</h2>
+        <p style="text-align: center; color: var(--gray); margin-bottom: 2rem; font-size: 1.1rem;">Customized solutions to address your climate and disaster risk reduction needs</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Innovative Climate Change Adaptation (ICCA)</h3>
+                <p><strong>Future-Proof Your Projects with Advanced Climate Change Adaptation</strong></p>
+                <br>
+                <p>Cutting-edge strategies to help organizations adapt to environmental challenges through comprehensive risk assessments and practical implementation strategies.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Strategic Disaster Risk Reduction (SDRR)</h3>
+                <p><strong>Minimize Risks and Enhance Preparedness</strong></p>
+                <br>
+                <p>Tailored disaster risk reduction services including hazard identification, vulnerability assessments, and community-based risk reduction programs.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Data-Driven Resilience-Building (DDRS)</h3>
+                <p><strong>Strengthen Organizational Resilience</strong></p>
+                <br>
+                <p>Focus on enhancing the ability of communities and organizations to recover and thrive through resilience frameworks and capacity-building initiatives.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="section">
+        <h2 class="section-title">Portfolio</h2>
+        <p style="text-align: center; color: var(--gray); margin-bottom: 2rem; font-size: 1.1rem;">A showcase of impactful projects and initiatives in climate resilience, disaster risk reduction, and sustainable development</p>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <h3>Climate Change Adaptation Programs</h3>
+                <p>Led comprehensive climate adaptation initiatives across multiple countries, developing resilience frameworks for vulnerable communities.</p>
+            </div>
+
+            <div class="portfolio-item">
+                <h3>Disaster Risk Reduction Projects</h3>
+                <p>Managed large-scale DRR programs, implementing early warning systems and community-based disaster preparedness strategies.</p>
+            </div>
+
+            <div class="portfolio-item">
+                <h3>International Development Consulting</h3>
+                <p>Provided expert consultation to international organizations on risk management, resilience building, and sustainable development.</p>
+            </div>
+
+            <div class="portfolio-item">
+                <h3>Digital Transformation Initiatives</h3>
+                <p>Spearheaded digitalization of Risk to Resilience strategies, integrating cutting-edge technologies into humanitarian frameworks.</p>
+            </div>
+
+            <div class="portfolio-item">
+                <h3>Capacity Building Workshops</h3>
+                <p>Conducted numerous training sessions and workshops for stakeholders on CCA, DRR, and anticipatory action methodologies.</p>
+            </div>
+
+            <div class="portfolio-item">
+                <h3>Policy Development & Advisory</h3>
+                <p>Contributed to policy formulation for climate resilience and disaster risk management at national and regional levels.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="books" class="section" style="background: var(--light);">
+        <h2 class="section-title">Books & Knowledge Products</h2>
+        <p style="text-align: center; color: var(--gray); margin-bottom: 2rem; font-size: 1.1rem;">Transformative guides for building resilience and thriving in an uncertain world</p>
+        
+        <div class="books-grid">
+            <div class="book-card">
+                <div class="book-cover">📖</div>
+                <div class="book-info">
+                    <span class="book-type">book</span>
+                    <h3>Leadership in the Modern World</h3>
+                    <p class="price">PHP 34.99</p>
+                    <p class="stock">75 in stock</p>
+                    <p style="font-size: 0.95rem; margin: 1rem 0; color: var(--gray);">Discover the essential leadership skills needed to thrive in today's fast-paced, interconnected business environment.</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <div class="book-cover">📝</div>
+                <div class="book-info">
+                    <span class="book-type">workbook</span>
+                    <h3>Strategic Thinking Toolkit</h3>
+                    <p class="price">PHP 49.99</p>
+                    <p class="stock">60 in stock</p>
+                    <p style="font-size: 0.95rem; margin: 1rem 0; color: var(--gray);">A practical workbook with frameworks, templates, and exercises to develop your strategic thinking capabilities.</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <div class="book-cover">👥</div>
+                <div class="book-info">
+                    <span class="book-type">book</span>
+                    <h3>Building High-Performance Teams</h3>
+                    <p class="price">PHP 39.99</p>
+                    <p class="stock">80 in stock</p>
+                    <p style="font-size: 0.95rem; margin: 1rem 0; color: var(--gray);">Learn the secrets to creating and managing teams that consistently deliver exceptional results.</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <div class="book-cover">📊</div>
+                <div class="book-info">
+                    <span class="book-type">book</span>
+                    <h3>Data-Driven Decision Making</h3>
+                    <p class="price">PHP 44.99</p>
+                    <p class="stock">45 in stock</p>
+                    <p style="font-size: 0.95rem; margin: 1rem 0; color: var(--gray);">Master the art of using analytics and data to drive better business decisions. Includes case studies and practical examples.</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <div class="book-cover">🌟</div>
+                <div class="book-info">
+                    <span class="book-type">book</span>
+                    <h3>Personal Resilience: The Path to Oneness</h3>
+                    <p class="price">PHP 777.00</p>
+                    <p class="stock">50 in stock</p>
+                    <p style="font-size: 0.95rem; margin: 1rem 0; color: var(--gray);">Reimagines resilience as a transformative journey toward wholeness with the groundbreaking CASE Equation framework.</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <div class="book-cover">💪</div>
+                <div class="book-info">
+                    <span class="book-type">course</span>
+                    <h3>Building Resilience: The Path to a More Fulfilling Life</h3>
+                    <p class="price">PHP 777.00</p>
+                    <p class="stock">100 in stock</p>
+                    <p style="font-size: 0.95rem; margin: 1rem 0; color: var(--gray);">A transformative blueprint for thriving in today's unpredictable world with practical tools and expert insights.</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="footer">
+        <div>
+            <img src="https://i.imgur.com/EebYhGX.png" alt="Alvin Silva Logo" class="footer-logo">
+            <h3>ALVIN M. SILVA, MDM</h3>
+            <p>Development Management Professional | Certified International Humanitarian</p>
+            <p style="margin-top: 2rem;">&copy; 2024 Alvin M. Silva. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const bookTitle = this.parentElement.querySelector('h3').textContent;
+                this.textContent = '✓ Added!';
+                this.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+                setTimeout(() => {
+                    this.textContent = 'Add to Cart';
+                    this.style.background = '';
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
