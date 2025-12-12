@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- PWA Compliance & Responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0B5394">
+    <title>Certificate of Mastery</title>
+    <!-- Load Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Base styles using Inter, switching to Playfair Display for emphasis */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        /* Certificate Container: The main document visual */
+        .certificate-container {
+            position: relative;
+            background-color: #ffffff;
+            border: 10px solid #0B5394; /* Deep Blue Outer Border */
+            padding: 3rem;
+            max-width: 900px;
+            min-height: 700px;
+        }
+        
+        /* Inner Decorative Border */
+        .certificate-container::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 3px solid #0B5394; /* Thinner Inner Border */
+            pointer-events: none;
+        }
+
+        /* Watermark style */
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-20deg);
+            font-size: 8rem;
+            font-family: 'Playfair Display', serif;
+            color: rgba(11, 83, 148, 0.1); /* Very light, transparent blue */
+            font-weight: 700;
+            user-select: none;
+            z-index: 0;
+        }
+
+        /* Title/Subtitle styling */
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            line-height: 1;
+        }
+        .subtitle {
+            font-size: 1.5rem;
+            color: #374151;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+        
+        /* Recipient Name emphasis */
+        .recipient-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: #0B5394;
+            margin: 1.5rem 0;
+            border-bottom: 2px dashed #D1D5DB;
+            display: inline-block;
+            padding-bottom: 0.25rem;
+        }
+
+        /* Competencies Grid */
+        .competency-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .competency-item {
+            padding: 0.5rem 1rem;
+            background-color: #EFF6FF; /* Light blue background */
+            color: #1E3A8A; /* Darker blue text */
+            border-radius: 9999px; /* Full rounded corners (pill shape) */
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        /* Signature/Seal area */
+        .signature-line {
+            height: 1px;
+            width: 200px;
+            background-color: #111827;
+            margin-top: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .certificate-container {
+                padding: 1.5rem;
+                border-width: 6px;
+                min-height: auto;
+            }
+            .certificate-container::before {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+            }
+            .title {
+                font-size: 2rem;
+            }
+            .recipient-name {
+                font-size: 2.5rem;
+            }
+            .watermark {
+                font-size: 5rem;
+            }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 flex justify-center items-center min-h-screen">
+
+    <div class="certificate-container shadow-2xl mx-auto z-10">
+        
+        <!-- Background Watermark -->
+        <div class="watermark">MASTER</div>
+
+        <!-- Header Section (SINGLE, CENTERED BLOCK) -->
+        <div class="header flex flex-col items-center justify-center mb-8 z-20 relative text-center">
+            
+            
+            <!-- Logo -->
+            <img 
+                src="https://th.bing.com/th/id/OIP.Gmc30H6CNy10BwA3a6KJZwHaHa?w=162&h=180&c=7&r=0&o=7&dpr=2&pid=1.7&rm=3"
+                alt="NIST SP 800-61 Revision 3 Logo"
+                class="w-24 h-24 object-contain inline-block mb-4"
+                onerror="this.onerror=null; this.src='https://placehold.co/96x96/E0F2F7/0B5394?text=NIST+Logo';"
+            >
+            
+            <!-- Titles (Centered) -->
+            <div class="title text-center">Certificate of Mastery</div>
+            <div class="subtitle text-center">Incident Response Excellence</div>
+            <div class="framework text-sm text-gray-600 mt-2 font-medium">Revision 3 • CSF 2.0 Aligned</div>
+
+        </div>
+
+        <!-- Content Section -->
+        <div class="content mt-12 mb-12 text-center relative z-20">
+            <div class="proclamation text-xl text-gray-700 mb-4">
+                This is to certify that
+            </div>
+            
+            <div class="recipient-name">
+                ALVIN M. SILVA
+            </div>
+            
+            <div class="achievement text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed mb-8">
+                has successfully demonstrated comprehensive mastery of the
+                <strong class="text-gray-900">
+                    NIST Special Publication 800-61 Revision 3: Computer Security Incident Handling Guide
+                </strong>
+                , including full understanding of the Cybersecurity Framework 2.0 alignment and the six core functions of incident response.
+            </div>
+            
+            <!-- Demonstrated Competencies -->
+            <div class="competencies mt-10">
+                <h3 class="text-xl font-bold text-gray-900 mb-4 uppercase tracking-wider">
+                    Demonstrated Competencies
+                </h3>
+                <div class="competency-list max-w-4xl mx-auto">
+                    <div class="competency-item">Govern (GV) Function</div>
+                    <div class="competency-item">Identify (ID) Function</div>
+                    <div class="competency-item">Protect (PR) Function</div>
+                    <div class="competency-item">Detect (DE) Function</div>
+                    <div class="competency-item">Respond (RS) Function</div>
+                    <div class="competency-item">Recover (RC) Function</div>
+                    <div class="competency-item">Incident Classification</div>
+                    <div class="competency-item">Evidence Preservation</div>
+                    <div class="competency-item">Forensic Analysis</div>
+                    <div class="competency-item">Playbook Development</div>
+                    <div class="competency-item">Stakeholder Communication</div>
+                    <div class="competency-item">Continuous Improvement</div>
+                </div>
+            </div>
+
+            <div class="achievement text-base text-gray-600 max-w-3xl mx-auto leading-relaxed mt-10">
+                This certification recognizes expertise in incident detection, analysis, containment, eradication, recovery, and post-incident activities in accordance with the latest federal cybersecurity standards and best practices.
+            </div>
+        </div>
+
+        <!-- Footer Section (Date, Signature, Verification Code) -->
+        <div class="mt-12 flex justify-between items-end relative z-20">
+            
+            <!-- Left Block: Date & Verification Code (Incorporated) -->
+            <div class="w-1/3 text-left flex flex-col justify-end h-full">
+                <p class="text-lg text-gray-700">Issued on: September 17, <strong>2025</strong></p>
+                <div class="mt-4 pt-2 border-t border-gray-300">
+                    <p class="text-xs font-semibold text-gray-500 uppercase">
+                        Verified Certificate ID
+                    </p>
+                    <p class="text-sm font-mono text-gray-800">
+                        0000-660991536912-0430-20250717
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Middle Block: Signature (E-Signature Placeholder Incorporated) -->
+            <div class="w-1/3 text-center">
+                <img 
+                    src="https://placehold.co/200x50/ffffff/111111?text=A.Hawthorne" 
+                    alt="Certifying Authority Digital Signature"
+                    class="w-full h-auto mx-auto pb-1"
+                    style="max-width: 200px; height: 50px; object-fit: contain;"
+                    onerror="this.onerror=null; this.src='https://placehold.co/200x50/ffffff/111111?text=Signature+Placeholder';"
+                >
+                <div class="signature-line mx-auto"></div>
+                <p class="text-sm font-semibold text-gray-800 uppercase tracking-wider pt-1">
+                    Dr. Eliza Hawthorne, CSO
+                </p>
+            </div>
+
+            <!-- Right Block: Seal -->
+            <div class="w-1/3 text-right">
+                 <div class="inline-flex items-center justify-center w-24 h-24 rounded-full border-4 border-red-600 bg-red-100 shadow-lg p-2 text-red-800 font-bold text-center leading-tight">
+                    <div class="seal-text text-sm">
+                        Certified
+                        <br>
+                        Master
+                        <br>
+                        2025
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
